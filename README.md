@@ -19,7 +19,7 @@ This project is designed to manage the operations of the Little Lemon fast-food 
 
 To view the Entity-Relationship Diagram, click here or see the image below.
 
-![Diagram](Screenshot 2024-06-16 150654.png)
+![Diagram]([Screenshot 2024-06-16 150654.png](https://github.com/Zubair-dev/db_capstone_project/blob/52a0f11efcb940ac18c6e9fd3a3f406103d989ce/Screenshot%202024-06-16%20150654.png))
 
  
 ## Stored Procedures
