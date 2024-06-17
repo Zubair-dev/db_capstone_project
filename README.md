@@ -25,12 +25,8 @@ This stored procedure retrieves the maximum quantity of a specific item that has
 
 ```sql
 CREATE PROCEDURE GetMaxQuantity()
-BEGIN
-  DECLARE maxQty INT;
-
-  SELECT MAX(Quantity) INTO maxQty FROM `LittleLemonDB`.`Orders`;
-
-  SELECT maxQty AS 'Maximum Ordered Quantity';
+SELECT MAX(Quantity) AS "Max Quantity in Order"
+FROM orders;
 END;
 ```
 
@@ -40,7 +36,7 @@ CALL GetMaxQuantity()
 
 ### CheckBooking()
 
-The CheckBooking stored procedure validates whether a table is already booked on a specified date. It will output a status message indicating whether the table is available or already booked.
+The CheckBooking stored procedure validates whether a table is booked on a specified date. It will output a status message indicating whether the table is available or booked.
 
 ```sql
 CREATE PROCEDURE `LittleLemonDB`.`CheckBooking`(IN booking_date DATE, IN table_number INT)
@@ -68,16 +64,13 @@ CALL CheckBooking('2022-11-12', 3);
 This stored procedure updates the booking details in the database. It takes the booking ID and new booking date as parameters, making sure the changes are reflected in the system.
 
 ```sql
-CREATE PROCEDURE `LittleLemonDB`.`UpdateBooking`(
-    IN booking_id_to_update INT, 
-    IN new_booking_date DATE)
+DROP PROCEDURE IF EXISTS UpdateBooking; 
+CREATE PROCEDURE UpdateBooking(Booking_Id INT, Booking_Slot DATETIME)
 BEGIN
-    UPDATE `LittleLemonDB`.`Bookings`
-    SET `Date` = new_booking_date
-    WHERE `BookingID` = booking_id_to_update;
-
-    SELECT CONCAT('Booking ', booking_id_to_update, ' updated') AS 'Confirmation';
-END;
+UPDATE bookings SET BookingSlot = Booking_Slot
+WHERE BookingID = Booking_Id;
+SELECT CONCAT('Booking ', Booking_Id, ' updated') AS 'Confirmation';
+END ; 
 ```
 ```sql
 CALL `LittleLemonDB`.`UpdateBooking`(9, '2022-11-15');
@@ -118,19 +111,21 @@ CALL `LittleLemonDB`.`AddBooking`(17, 1, '2022-10-10', 5, 2);
 ### CancelBooking()
 This stored procedure deletes a specific booking from the database, allowing for better management and freeing up resources.
 ```sql
-CREATE PROCEDURE `LittleLemonDB`.`CancelBooking`(IN booking_id_to_cancel INT)
-BEGIN
-    DELETE FROM `LittleLemonDB`.`Bookings`
-    WHERE `BookingID` = booking_id_to_cancel;
+CREATE PROCEDURE `CancelBooking`(in bID int)
+Begin
+declare message varchar(100);
+Delete from bookings where BookingID = bID;
 
-    SELECT CONCAT('Booking ', booking_id_to_cancel, ' cancelled') AS 'Confirmation';
+set message = concat("Booking ", bID," Cancelled");
+
+select message as "Confrmation";
 END;
 ```
 ```sql
 CALL `LittleLemonDB`.`CancelBooking`(9);
 ```
 ### AddValidBooking()
-The AddValidBooking stored procedure aims to securely add a new table booking record. It starts a transaction and attempts to insert a new booking record, checking the table's availability.
+The AddValidBooking stored procedure aims to add a new table booking record securely. It starts a transaction and attempts to insert a new booking record, checking the table's availability.
 
 ```sql
 CREATE PROCEDURE `LittleLemonDB`.`AddValidBooking`(IN new_booking_date DATE, IN new_table_number INT, IN new_customer_id INT, IN new_staff_id INT)
