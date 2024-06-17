@@ -11,13 +11,7 @@
     - [AddBooking()](#addbooking)
     - [CancelBooking()](#cancelbooking)
     - [AddValidBooking()](#addvalidbooking)
-    - [CancelOrder()](#cancelorder)
-  - [Data Analysis with Tableau](#data-analysis-with-tableau)
-    - [Customers sales](#customers-sales)
-    - [Profit chart](#profit-chart)
-    - [Sales Bubble Chart](#sales-bubble-chart)
-    - [Cuisine Sales and Profits](#cuisine-sales-and-profits)
-    - [Dashboard](#dashboard)
+    - [CancelOrder()](#cancelorder) 
 
 ## Project Description
 
