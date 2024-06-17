@@ -187,21 +187,4 @@ END;
 ```sql
 CALL CancelOrder(5);
 ```
-
-## Data Analysis with Tableau
-A Tableau workbook has been created, containing various charts and dashboards to facilitate data analysis. Download the workbook [here](./tableau.twb)
-
-### Customers sales
-![Customers sales](./Images/tableau-task1.png)
-
-### Profit chart
-![Profit chart](./Images/tableau-task2.png)
-
-### Sales Bubble Chart
-![Sales Bubble Chart](./Images/tableau-task3.png)
-
-###  Cuisine Sales and Profits
-![ Cuisine Sales and Profits](./Images/tableau-task4.png)
-
-### Dashboard
-![dashboard](./Images/tableau-task5.png)
+ 
